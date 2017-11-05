@@ -1,0 +1,34 @@
+<div>
+    <ul class="recipes">
+      <li *ngFor="let recipe of recipes" (click)="onSelect(recipe)" [class.selected]="recipe === selectedRecipe">
+        <button class="delete-button" (click)="deleteRecipe(recipe)">Delete</button>
+        <div class="recipe-element">
+          <div class="badge">{{recipe.id}}</div>
+          <div class="name">{{recipe.name}}</div>
+          <div class="description">{{recipe.description}}</div>
+        </div>
+      </li>
+    </ul>
+    <div class="editarea">
+      <button (click)="enableAddMode()">Add New Recipe</button>
+      <div *ngIf="selectedRecipe">
+        <div class="editfields">
+          <div>
+            <label>id: </label>
+            <input [(ngModel)]="selectedRecipe.id" placeholder="id" *ngIf="addingRecipe" />
+            <label *ngIf="!addingRecipe" class="value">{{selectedRecipe.id}}</label>
+          </div>
+          <div>
+            <label>name: </label>
+            <input [(ngModel)]="selectedRecipe.name" placeholder="name" />
+          </div>
+          <div>
+            <label>description: </label>
+            <input [(ngModel)]="selectedRecipe.description" placeholder="description" />
+          </div>
+        </div>
+        <button (click)="cancel()">Cancel</button>
+        <button (click)="save()">Save</button>
+      </div>
+    </div>
+  </div>
